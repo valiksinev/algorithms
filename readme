@@ -14,6 +14,6 @@ nails: https://coderun.yandex.ru/problem/pin?currentPage=1&pageSize=10&rowNumber
 Выведите единственное число — минимальную суммарную длину всех ниточек. 
 
 Пример 1
-Ввод 				Вывод
+Ввод                Вывод
 6
 3 13 12 4 14 6      5
