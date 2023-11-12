@@ -1,5 +1,7 @@
-mod nails;
+// mod nails;
+mod cheapest_way;
 
 fn main() {
-    nails::execute();
+    // nails::execute();
+    cheapest_way::execute();
 }
