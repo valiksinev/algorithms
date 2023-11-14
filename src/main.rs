@@ -3,7 +3,8 @@
 // mod most_expensive_way;
 // mod breadth_first_search;
 // mod knight_move;
-mod bubble_sort;
+// mod bubble_sort;
+mod binary_search;
 
 fn main() {
     // nails::execute();
@@ -11,5 +12,6 @@ fn main() {
     // most_expensive_way::execute();
     // breadth_first_search::execute();
     // knight_move::execute();
-    bubble_sort::execute();
+    // bubble_sort::execute();
+    binary_search::execute();
 }
