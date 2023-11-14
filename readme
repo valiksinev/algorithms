@@ -114,8 +114,11 @@ https://coderun.yandex.ru/problem/knight-move?currentPage=1&pageSize=10&rowNumbe
 31 34     293930
 
 
-5. Bubble sort
+5. bubble_sort
 сортировка пузырьком
 
-6. Binary_search
+6. binary_search
 Бинарный поиск
+
+7.quick_sort
+Быстрая сотировка
