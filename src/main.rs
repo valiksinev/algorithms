@@ -5,7 +5,8 @@
 // mod knight_move;
 // mod bubble_sort;
 // mod binary_search;
-mod quick_sort;
+// mod quick_sort;
+mod kafe;
 
 fn main() {
     // nails::execute();
@@ -15,5 +16,6 @@ fn main() {
     // knight_move::execute();
     // bubble_sort::execute();
     // binary_search::execute();
-    quick_sort::execute();
+    // quick_sort::execute();
+    kafe::execute();
 }
