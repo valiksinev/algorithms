@@ -11,7 +11,7 @@ pub fn execute(){
     let x = read_stdin();
     let y = read_stdin();
 
-    let mut a = vec![vec![0_u32; x.len()+1]; y.len()+1];
+    let mut a = vec![vec![0_u32; y.len()+1]; x.len()+1];
 
     for i in 0..x.len() {
         for j in 0..y.len() {
