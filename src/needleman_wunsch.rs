@@ -16,7 +16,7 @@ pub fn execute(){
     for i in 0..x.len() {
         for j in 0..y.len() {
             a[i+1][j+1] = if x[i] == y[j] {
-                a[i][j]
+                a[i][j] + 1
             } else {
                 a[i+1][j].max(a[i][j+1])
             };
@@ -34,7 +34,7 @@ pub fn execute(){
         } else if a[i][j-1] > a[i-1][j] {
             j -=1;
         } else {
-            i -=1;
+            j -=1;
         }
     };
 
