@@ -6,7 +6,8 @@
 // mod bubble_sort;
 // mod binary_search;
 // mod quick_sort;
-mod kafe;
+// mod kafe;
+mod needleman_wunsch;
 
 fn main() {
     // nails::execute();
@@ -17,5 +18,6 @@ fn main() {
     // bubble_sort::execute();
     // binary_search::execute();
     // quick_sort::execute();
-    kafe::execute();
+    // kafe::execute();
+    needleman_wunsch::execute();
 }
