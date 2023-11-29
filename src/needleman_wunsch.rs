@@ -34,7 +34,7 @@ pub fn execute(){
         } else if a[i][j-1] > a[i-1][j] {
             j -=1;
         } else {
-            j -=1;
+            i -=1;
         }
     };
 
