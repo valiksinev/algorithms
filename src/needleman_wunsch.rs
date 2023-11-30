@@ -2,10 +2,10 @@ use std::io;
 use std::str::FromStr;
 
 pub fn execute(){
-    let read_stdin = || -> Vec<u32> {
+    let read_stdin = || -> Vec<i32> {
         let mut s = String::new();
         io::stdin().read_line(&mut s).unwrap();
-        s.as_str().split_whitespace().map(u32::from_str).collect::<Result<Vec<u32>, _>>().unwrap()
+        s.as_str().split_whitespace().map(i32::from_str).collect::<Result<Vec<i32>, _>>().unwrap()
     };
 
     let x = read_stdin();
