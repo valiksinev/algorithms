@@ -7,7 +7,8 @@
 // mod binary_search;
 // mod quick_sort;
 // mod kafe;
-mod needleman_wunsch;
+// mod needleman_wunsch;
+mod linked_components;
 
 fn main() {
     // nails::execute();
@@ -19,5 +20,6 @@ fn main() {
     // binary_search::execute();
     // quick_sort::execute();
     // kafe::execute();
-    needleman_wunsch::execute();
+    // needleman_wunsch::execute();
+    linked_components::execute();
 }
