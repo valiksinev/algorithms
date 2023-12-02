@@ -9,7 +9,8 @@
 // mod kafe;
 // mod needleman_wunsch;
 // mod linked_components;
-mod cheating;
+// mod cheating;
+mod topsort;
 
 fn main() {
     // nails::execute();
@@ -23,5 +24,6 @@ fn main() {
     // kafe::execute();
     // needleman_wunsch::execute();
     // linked_components::execute();
-    cheating::execute();
+    // cheating::execute();
+    topsort::execute();
 }
