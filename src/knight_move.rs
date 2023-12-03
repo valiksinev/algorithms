@@ -2,10 +2,9 @@ use std::fs;
 
 pub fn execute(){
 
-    let s= fs::read_to_string("/home/user/CLionProjects/alg/algorithms/file/knight_move.in")
-        .expect("Should have been able to read the file");
-
-    let (n, m): (usize, usize) = s.split_once(' ')
+    let mut s = String::new();
+    std::io::stdin().read_line(&mut s).unwrap();
+    let (n, m): (usize, usize) = s.trim().split_once(' ')
         .map(|(a, b)| (a.parse::<usize>().unwrap(), b.parse::<usize>()
             .unwrap())).expect("whilespace split error");
 
@@ -19,7 +18,6 @@ pub fn execute(){
     }
 
     let res = format!("{}", table[n][m]);
-    fs::write("/home/user/CLionProjects/alg/algorithms/file/knight_move.out", res)
-        .expect("Should have been able to write the file");
+    println!("{}", res);
 }
 
