@@ -43,7 +43,7 @@ pub fn execute(){
                         if g[day-1][coupon +1] != u32::MAX {
                             g[day][coupon] = g[day-1][coupon +1];
 
-                            k2_cur[coupon] = k2_cur[coupon + 1] + 1;
+                            k2_cur[coupon] = k2[coupon + 1] + 1;
                             k2_days_cur[coupon] = k2_days[coupon + 1].clone();
                             k2_days_cur[coupon].push(day)
                         }
@@ -54,10 +54,13 @@ pub fn execute(){
                             g[day][coupon] = cash;
                         } else {
                             g[day][coupon] = free;
+                            if g[day-1][coupon +1] != u32::MAX {
+                                k2_cur[coupon] = k2[coupon + 1] + 1;
+                                k2_days_cur[coupon] = k2_days[coupon + 1].clone();
+                                k2_days_cur[coupon].push(day)
+                            }
 
-                            k2_cur[coupon] = k2_cur[coupon + 1] + 1;
-                            k2_days_cur[coupon] = k2_days[coupon + 1].clone();
-                            k2_days_cur[coupon].push(day)
+
                         }
                     };
                 }
@@ -74,9 +77,12 @@ pub fn execute(){
                     } else {
                         g[day][coupon] = free;
 
-                        k2_cur[coupon] = k2_cur[coupon + 1] + 1;
-                        k2_days_cur[coupon] = k2_days[coupon + 1].clone();
-                        k2_days_cur[coupon].push(day)
+                        if g[day-1][coupon +1] != u32::MAX {
+                            k2_cur[coupon] = k2[coupon + 1] + 1;
+                            k2_days_cur[coupon] = k2_days[coupon + 1].clone();
+                            k2_days_cur[coupon].push(day)
+
+                        }
                     }
                 }
             }
