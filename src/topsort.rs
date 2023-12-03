@@ -1,6 +1,6 @@
 use std::{
     io,
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
 };
 
 pub fn execute() {
@@ -8,10 +8,10 @@ pub fn execute() {
         let mut s = String::new();
         io::stdin().read_line(&mut s).unwrap();
         let (x, y) = s.trim().split_once(' ').unwrap();
-        (x.parse().unwrap(), y.parse().unwrap())
+        (x.trim().parse().unwrap(), y.trim().parse().unwrap())
     };
 
-    let (_n, m) = read();
+    let (n, m) = read();
 
     let mut edges:BTreeMap<u32, Vec<u32>> = BTreeMap::new();
 
@@ -21,23 +21,37 @@ pub fn execute() {
         values.push(v);
     }
 
-    let mut finished = vec![];
 
-    for i in edges.keys() {
-        dfs(i, &edges, &mut finished);
+    let mut finished = BTreeSet::new(); // for fast check "contains"
+    let mut finished_v = vec![]; // for store order.
+    for i in 1..n+1 {
+        let mut visited = BTreeSet::new();
+        dfs(&i, &edges, &mut finished, &mut visited, &mut finished_v);
     }
 
-    finished.iter().rev().for_each(|a| print!("{} ", a));
+    if finished_v.is_empty() {
+        println!("-1");
+    } else {
+        finished_v.iter().rev().for_each(|&a| print!("{} ", &a));
+    }
 }
 
 
-fn dfs (u: &u32, edges: &BTreeMap<u32, Vec<u32>>, finished: &mut Vec<u32>) {
-    if !finished.contains(u){
-        if let Some(values) = edges.get(u) {
-            for i in values {
-                dfs(i, edges, finished);
-            }
-        }
-        finished.push(*u);
+fn dfs (u: &u32, edges: &BTreeMap<u32, Vec<u32>>, finished: &mut BTreeSet<u32>, visited: &mut BTreeSet<u32>, finished_v: &mut Vec<u32>) {
+    // cyclic case
+    if finished.contains(u) {
+        return;
     }
+    if !visited.insert(*u) {
+        println!("-1");
+        std::process::exit(0);
+    }
+
+    if let Some(values) = edges.get(u) {
+        for i in values {
+            dfs(i, edges, finished, visited, finished_v);
+        }
+    }
+    finished.insert(*u);
+    finished_v.push(*u);
 }
