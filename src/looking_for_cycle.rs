@@ -3,8 +3,6 @@ use std::{
     collections::BTreeSet,
 };
 
-
-
 pub fn execute() {
     let mut s = String::new();
     io::stdin().read_line(&mut s).unwrap();
@@ -23,39 +21,46 @@ pub fn execute() {
     }
 
     let mut visited = BTreeSet::new();
-    let mut result = vec![];
     for i in 0..n {
         if !visited.contains(&(i as u32) ) {
-            dfs(i as u32, &g, &mut visited, None, &mut result);
+            if let Err(v) = dfs(i as u32, &g, &mut visited, None) {
+                println!("YES");
+                println!("{}", v.len());
+                v.iter().for_each(|a| print!("{} ", a+1));
+                return;
+            }
         }
     }
     println!("NO");
 }
 
-fn dfs (i: u32, g: &Vec<Vec<u32>>, visited: &mut BTreeSet<u32>, parent: Option<u32>, result: &mut Vec<u32>) -> Option<u32> {
+
+fn dfs (i: u32, g: &Vec<Vec<u32>>, visited: &mut BTreeSet<u32>, parent: Option<u32>) -> Result<Vec<u32>, Vec<u32>> {
     if !visited.insert(i) {
-        return Some(i);
+        return Ok(vec![i]);
     }
 
     for j in g[i as usize].iter() {
+        //skip parent
         if let Some(parent) = parent {
             if parent == *j {
                 continue
             }
         }
-        if let Some(k) = dfs(*j, g, visited, Some(i), result) {
-            result.push(i);
-            if k == i {
-
-                println!("YES");
-                println!("{}", result.len());
-                result.iter().for_each(|a| print!("{} ", a+1));
-                std::process::exit(0);
-            } else {
-                return Some(k);
-            }
+        match dfs(*j, g, visited, Some(i)) {
+            Ok(mut v) => {
+                if !v.is_empty(){
+                    if *v.first().unwrap() == i {
+                        return Err(v)
+                    } else {
+                        v.push(i);
+                        return Ok(v);
+                    }
+                }
+            },
+            Err(v) => { return Err(v); }
         }
     }
 
-    None
+    Ok(vec![])
 }
