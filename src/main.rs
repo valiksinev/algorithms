@@ -12,7 +12,8 @@
 // mod linked_components;
 // mod cheating;
 // mod topsort;
-mod shortest_way;
+// mod shortest_way;
+mod path_in_graph;
 
 fn main() {
     // nails::execute();
@@ -29,5 +30,6 @@ fn main() {
     // cheating::execute();
     // topsort::execute();
     // looking_for_cycle::execute();
-    shortest_way::execute();
+    // shortest_way::execute();
+    path_in_graph::execute();
 }
