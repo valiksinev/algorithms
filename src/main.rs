@@ -7,11 +7,12 @@
 // mod binary_search;
 // mod quick_sort;
 // mod kafe;
-mod looking_for_cycle;
+// mod looking_for_cycle;
 // mod needleman_wunsch;
 // mod linked_components;
 // mod cheating;
 // mod topsort;
+mod shortest_way;
 
 fn main() {
     // nails::execute();
@@ -27,5 +28,6 @@ fn main() {
     // linked_components::execute();
     // cheating::execute();
     // topsort::execute();
-    looking_for_cycle::execute();
+    // looking_for_cycle::execute();
+    shortest_way::execute();
 }
