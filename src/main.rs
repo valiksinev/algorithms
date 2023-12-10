@@ -13,7 +13,8 @@
 // mod cheating;
 // mod topsort;
 // mod shortest_way;
-mod path_in_graph;
+// mod path_in_graph;
+mod fleas;
 
 fn main() {
     // nails::execute();
@@ -31,5 +32,6 @@ fn main() {
     // topsort::execute();
     // looking_for_cycle::execute();
     // shortest_way::execute();
-    path_in_graph::execute();
+    // path_in_graph::execute();
+    fleas::execute();
 }
