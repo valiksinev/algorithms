@@ -1,4 +1,4 @@
-use std::io;
+use std::{io, collections::HashSet};
 
 pub fn execute() {
     let read = || -> Vec<usize> {
@@ -20,7 +20,8 @@ pub fn execute() {
     }
 
     let mut cost =vec![vec![None; m+1]; n+1];
-    bfs(&[finish], &mut cost, 0 );
+    let from = HashSet::from([finish]);
+    bfs(&from, &mut cost, 0 );
 
     let mut sum = 0;
     for i  in 0..q {
@@ -36,13 +37,13 @@ pub fn execute() {
     println!("{sum}");
 }
 
-fn bfs(from: &[(usize, usize)], cost: &mut Vec<Vec<Option<u32>>>, depth: u32) {
+fn bfs(from: &HashSet<(usize, usize)>, cost: &mut Vec<Vec<Option<u32>>>, depth: u32) {
 
     if from.is_empty() {
         return
     };
 
-    let mut to = vec![];
+    let mut to = HashSet::new();
 
     for (x, y) in from {
         cost[*x][*y] = Some(depth);
@@ -58,7 +59,7 @@ fn bfs(from: &[(usize, usize)], cost: &mut Vec<Vec<Option<u32>>>, depth: u32) {
                     let u = u as usize;
                     let v = v as usize;
                     if cost[u][v].is_none() {
-                        to.push((u, v));
+                        to.insert((u, v));
                     }
                 }
             }
