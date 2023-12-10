@@ -1,7 +1,7 @@
-use std::{io, collections::HashSet};
+use std::io;
 
 pub fn execute() {
-    let read = || -> Vec<u32> {
+    let read = || -> Vec<usize> {
         let mut s = String::new();
         io::stdin().read_line(&mut s).unwrap();
         s.trim().split_whitespace().map(|a| a.parse().unwrap()).collect()
@@ -11,20 +11,22 @@ pub fn execute() {
     let n = v[0];
     let m = v[1];
     let finish = (v[2], v[3]);
-    let q = v[4] as usize;
+    let q = v[4];
 
-    let mut start = vec![];
+    let mut fleas = vec![];
     for _i in 0..q {
         let point = read();
-        start.push((point[0], point[1]));
+        fleas.push((point[0], point[1]));
     }
 
+    let mut cost =vec![vec![None; m+1]; n+1];
+    bfs(&[finish], &mut cost, 0 );
+
     let mut sum = 0;
-    for flea in 0..q {
-        let mut visited = HashSet::from([start[flea]]);
-        let (x, y) = start[flea];
-        if let Ok(depth) =  bfs(&[(x, y)], n, m, finish, &mut visited, 0) {
-            sum += depth;
+    for i  in 0..q {
+        let (x, y) = fleas[i];
+        if let Some(cost) = cost[x][y] {
+            sum += cost;
         } else {
             println!("-1");
             return;
@@ -34,35 +36,34 @@ pub fn execute() {
     println!("{sum}");
 }
 
-fn bfs(from: &[(u32, u32)], n: u32, m: u32, finish: (u32, u32), visited: &mut HashSet<(u32, u32)>, depth: u32) -> Result<u32, ()> {
+fn bfs(from: &[(usize, usize)], cost: &mut Vec<Vec<Option<u32>>>, depth: u32) {
+
+    if from.is_empty() {
+        return
+    };
+
     let mut to = vec![];
 
-    for (x,y) in from {
-        if *x == finish.0 && *y == finish.1 {
-            return Ok(depth);
-        }
+    for (x, y) in from {
+        cost[*x][*y] = Some(depth);
+
         for dx in [-1_i32, -2, 1, 2] {
-            for dy in  [-1_i32, -2, 1, 2] {
+            for dy in [-1_i32, -2, 1, 2] {
                 if dx.abs() == dy.abs() {
                     continue
                 }
                 let u: i32 = *x as i32 + dx;
                 let v: i32 = *y as i32 + dy;
-                if u >= 1  && u <= n as i32  && v >= 1 && v <= m as i32 {
-                    let u = u as u32;
-                    let v = v as u32;
-                    if visited.insert((u, v)){
+                if u >= 1 && u < cost.len() as i32 && v >= 1 && v < cost[0].len() as i32 {
+                    let u = u as usize;
+                    let v = v as usize;
+                    if cost[u][v].is_none() {
                         to.push((u, v));
                     }
                 }
             }
         }
-
     }
 
-    if to.is_empty() {
-        return Err(())
-    };
-
-    bfs(&to, n, m, finish, visited, depth + 1)
+    bfs(&to, cost, depth + 1);
 }
